@@ -1,8 +1,10 @@
 --> Install mysql : yum install mysql -y
-
+    
 --> Install PHP : amazon-linux-extras install php7.2 -y
 
 --> Install httpd : yum install httpd -y
+    Check using : rpm -q httpd
+  -> Start service using  :  systemctl  start httpd
 
 --> Install WordPress : wget https://wordpress.org/latest.tar.gz
 
