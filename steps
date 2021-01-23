@@ -1,0 +1,9 @@
+--> Install mysql : yum install mysql -y
+
+--> Install PHP : amazon-linux-extras install php7.2 -y
+
+--> Install httpd : yum install httpd -y
+
+--> Install WordPress : wget https://wordpress.org/latest.tar.gz
+
+--> Extract WordPress : tar -xzf latest.tar.gz
