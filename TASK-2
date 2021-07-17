@@ -1,0 +1,28 @@
+📌 First, we need to download the AWS CLI.
+   You can download from the below site.
+   https://awscli.amazonaws.com/AWSCLIV2.msi
+
+📌 check cli installed or not
+   aws --version
+
+📌 configure the application to be able to connect to our AWS account.
+   aws configure
+   After this we have to login by AWS access key ID and AWS secret access key.
+
+📌 Create a Key Pair
+   aws ec2 create-key-pair --key-name firstSkey
+
+📌  Create a Security group
+   aws ec2 create-security-group --group-name firstSG --description “FirstSG”
+
+📌 Launch ec2 instance using the above created Key pair and Security
+   aws ec2 run-instance --image-id ami-0e306788ff2473ccb --instance-type t2.micro --count 1 --subnet-id subnet-37666f5f --security-group-ids sg-067ccba5d22175a53 --key-name firstSkey
+
+📌 Create an EBS Volume of size 1 GB
+   aws ec2 create-volume --volume-type gp2 -- size 1 --availability-zone ap-south-1a
+
+   ## NOTE: The EBS Volume should be created in the same availability zone as of EC2 instance to be it should be attached
+
+📌 Attach above created EBS volume to the ec2 Instance
+   aws ec2 attach-volume --volume-id vol-1234567890abcdef0 --instance-id i-01474ef662b89480 --device /dev/sdg
+
