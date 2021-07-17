@@ -1,0 +1,35 @@
+1. Webserver configured on EC2 instance
+   
+   First install httpd : 
+   yum install httpd
+
+   start httpd service :
+   systemctl start httpd
+
+2. Now, the volume that we attached in previous article we have to mount that volume to the document root (/var/www/html) to make it permanent.
+
+   First Create partition 
+   Formate the Partition
+   Mount this partition to root document
+
+3. Static objects used in code such as pictures stored in S3
+   First Create a s3 bucket:
+   aws s3api create-bucket --bucket aws-2-task --region ap-south-1 --create-bucket-configuration LocationConstraint=ap-south-1
+  
+   Then, Insert a image in the bucket.
+
+   Now make the bucket and image Public
+   •for bucket
+   aws s3api put- bucket -ac1 --ac1- public read --bucket aws-2-task
+   •for object
+   aws s3api put-object-acl --bucket aws-2-task --key download.jpg --grant-read url=http://acs.amazonaws.com/groups/global/AllUsers
+
+   Now, we can see the object from Browser but Image displayed with low speed and high latency.
+   So, for high speed and low latency, use the concept of Cloudfront.
+
+4. Setting up Content Delivery Network using CloudFront and using the origin domain as S3 bucket.
+   Now, Create Cloud front distribution
+   aws cloudfront create-distribution --origin-domain-name aws-2-task.s3.amazonaws.com --default-root-object download.jpg
+
+5. Finally, place the Cloud Front URL on the web app code for security and low latency.
+   See the webserver
